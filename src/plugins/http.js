@@ -3,7 +3,7 @@ import axios from 'axios';
 const configureAxios = () => {
   const instance = axios.create();
 
-  instance.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+  // instance.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
   instance.interceptors.request.use((request) => {
 
