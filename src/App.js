@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/storage';
 import Routes from './routes';
 import AppModal from './components/Modal/AppModal';
 import { CLOSE_MODAL } from './store/modal/actions';

@@ -62,7 +62,7 @@ export const DELETE_QUESTION = (id) => async (dispatch, getState) => {
 
     try {
         const { questions } = getState().quiz;
-        const { data } = await http.post('delete_quiz', { id });
+        await http.post('delete_quiz', { id });
         const updated = questions.filter(({ _id }) => _id !== id)
 
         dispatch({ type: quizTypes.SET_QUIZ, data: updated });

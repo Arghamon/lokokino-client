@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/storage';
 import styled from 'styled-components';
 import { v1 as uuid } from 'uuid';
 import Icon from '../../assets/Icon';
@@ -96,10 +97,13 @@ export default function AppQuestionModal({ data, close }) {
     const [form, setForm] = useState({
         title: '',
         answers: [],
-        tags: [],
+        tags: '',
         image: null,
     });
     const [loading, setLoading] = useState(false);
+    const [test, setTest] = useState(false);
+
+    const firebaseFolder = test ? 'test' : 'images';
 
 
     useEffect(() => {
@@ -116,7 +120,7 @@ export default function AppQuestionModal({ data, close }) {
             answer2: question.answers[1],
             answer3: question.answers[2],
         });
-    }, [data]);
+    }, [data, questions]);
 
     const onChange = ({ target }) => {
         setForm({ ...form, [target.name]: target.value });
@@ -124,7 +128,7 @@ export default function AppQuestionModal({ data, close }) {
     }
     const uploadFile = ({ target }) => {
         const file = target.files[0];
-        const imageRef = storageRef.current.child(`images/${uuid()}`);
+        const imageRef = storageRef.current.child(`${firebaseFolder}/${uuid()}`);
         setLoading(true);
         imageRef.put(file).then((snapshot) => {
             return imageRef.getDownloadURL();
@@ -137,17 +141,22 @@ export default function AppQuestionModal({ data, close }) {
         const { title, image } = form
         const tags = form.tags?.split(',') || [];
         const answers = [form.answer1, form.answer2, form.answer3];
-        if(!data.questionId) {
+        if (!data.questionId) {
             return dispatch(ADD_QUIZ({ title, image, answers, tags }));
         }
         dispatch(EDIT_QUIZ({ title, image, answers, tags, id: data.questionId }));
     }
     const chooseImage = () => file.current.click();
 
+    const onTestChange = () => setTest(true);
+
     return (
         <ModalContainer onClick={e => e.stopPropagation()}>
             <Title>
-                {data.questionId ? 'Edit Question' : 'Add Question'}
+                <div>
+                    {data.questionId ? 'Edit Question' : 'Add Question'}
+                    <input type="checkbox" style={{ marginLeft: 10 }} onChange={onTestChange} />
+                </div>
                 <Icon name='close' onClick={close} onChange={onChange} />
             </Title>
             <Content>
