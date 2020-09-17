@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { TitleItem } from './AppQuizHeader';
 import { colors } from '../../../assets/style';
+import { useDispatch } from 'react-redux';
+import { SET_CHECKED_QUESTIONS, REMOVE_CHECKED_QUESTIONS } from '../../../store/quiz/actions';
 
 const Figure = styled.div`
     width: 120px;
@@ -39,18 +41,27 @@ const ActiveLine = styled.div`
     opacity: ${props => props.visible ? 1 : 0}
 `;
 
-export default function AppQuizItemImage({ image }) {
+export default function AppQuizItemImage({ image, id }) {
 
-    const [checked, setChecked]= useState(false);
+    const [checked, setChecked] = useState(false);
+    const dispatch = useDispatch();
+    const checkbox = useRef(null);
 
-    const checkQuestion = () => setChecked(!checked);
+    const checkQuestion = ({ target }) => {
+        setChecked(checkbox.current.checked);
+        if (checkbox.current.checked) {
+            dispatch(SET_CHECKED_QUESTIONS(id));
+        } else {
+            dispatch(REMOVE_CHECKED_QUESTIONS(id));
+        }
+    };
 
     return (
         <Container tile={1.5}>
-            <ActiveLine visible={checked}/>
-            <Input type="checkbox" checked={checked} onChange={checkQuestion}/>
+            <ActiveLine visible={checked} />
+            <Input type="checkbox" checked={checked} onChange={checkQuestion} ref={checkbox} />
             <Figure>
-                <Image src={image} alt="movie" onClick={checkQuestion}/>
+                <Image src={image} alt="movie" onClick={() => checkbox.current.click()} />
             </Figure>
         </Container>
     )

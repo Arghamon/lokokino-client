@@ -17,10 +17,10 @@ const ItemContainer = styled(Container)`
 export default function AppQuizItem({ question }) {
     return (
         <ItemContainer>
-            <AppQuizItemImage image={question.image}/>
-            <AppQuizItemAnswers question={question}/>
-            <AppQuizItemTags tags={question.tags}/>
-            <AppQuizItemControls questionId={question._id}/>
+            <AppQuizItemImage image={question.image} id={question._id} />
+            <AppQuizItemAnswers question={question} />
+            <AppQuizItemTags tags={question.tags} />
+            <AppQuizItemControls questionId={question._id} />
         </ItemContainer>
     )
 }

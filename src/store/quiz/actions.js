@@ -8,6 +8,7 @@ export const quizTypes = {
     SET_LOADING: 'SET_LOADING',
     SET_ACTIVE_PAGE: 'SET_ACTIVE_PAGE',
     SET_ERROR: 'SET_ERROR',
+    SET_CHECKED_QUESTIONS: 'SET_CHECKED_QUESTIONS',
 };
 
 
@@ -30,7 +31,8 @@ export const FETCH_QUIZ = (page) => async (dispatch) => {
 
 export const ADD_QUIZ = (form) => async (dispatch, getState) => {
 
-    const { questions } = getState().quiz;
+    const { questions, count } = getState().quiz;
+
     try {
         const { data } = await http.post('quiz', form);
 
@@ -38,6 +40,7 @@ export const ADD_QUIZ = (form) => async (dispatch, getState) => {
         questions.pop();
         dispatch({ type: quizTypes.SET_QUIZ, data: questions });
         dispatch(CLOSE_MODAL());
+        dispatch({ type: quizTypes.SET_COUNT, data: count + 1 });
     } catch (e) {
         dispatch(SET_ERROR(true));
     }
@@ -58,12 +61,14 @@ export const EDIT_QUIZ = (form) => async (dispatch, getState) => {
     }
 }
 
-export const DELETE_QUESTION = (id) => async (dispatch, getState) => {
+export const DELETE_QUESTION = () => async (dispatch, getState) => {
+
+    const { checkedQuestions } = getState().quiz;
 
     try {
         const { questions } = getState().quiz;
-        const { data } = await http.post('delete_quiz', { id });
-        const updated = questions.filter(({ _id }) => _id !== id)
+        await http.post('delete_quiz', { ids: checkedQuestions });
+        const updated = questions.filter(({ _id }) => !checkedQuestions.includes(_id));
 
         dispatch({ type: quizTypes.SET_QUIZ, data: updated });
         dispatch(CLOSE_MODAL());
@@ -77,3 +82,18 @@ export const SET_ERROR = (error) => async (dispatch, getState) => {
     dispatch({ type: quizTypes.SET_ERROR, data: error })
 }
 
+export const SET_CHECKED_QUESTIONS = (id) => (dispatch, getState) => {
+    const { checkedQuestions } = getState().quiz;
+
+    checkedQuestions.push(id)
+
+    dispatch({ type: quizTypes.SET_CHECKED_QUESTIONS, data: checkedQuestions })
+}
+
+export const REMOVE_CHECKED_QUESTIONS = (id) => (dispatch, getState) => {
+    const { checkedQuestions } = getState().quiz;
+
+    const data = checkedQuestions.filter(item => item !== id);
+
+    dispatch({ type: quizTypes.SET_CHECKED_QUESTIONS, data })
+}
