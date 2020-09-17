@@ -60,9 +60,6 @@ export default function AppQuestionModal({ data, close }) {
     }
     
     const setImage = (url) => setForm({ ...form, image: url });
-    console.log(form);
-
-
 
     return (
         <ModalContainer onClick={e => e.stopPropagation()}>

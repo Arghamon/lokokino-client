@@ -71,6 +71,7 @@ export const DELETE_QUESTION = () => async (dispatch, getState) => {
         const updated = questions.filter(({ _id }) => !checkedQuestions.includes(_id));
 
         dispatch({ type: quizTypes.SET_QUIZ, data: updated });
+        dispatch({ type: quizTypes.SET_CHECKED_QUESTIONS, data: [] });
         dispatch(CLOSE_MODAL());
     } catch (e) {
         console.log(e);

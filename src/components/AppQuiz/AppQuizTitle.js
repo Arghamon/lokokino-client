@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Icon from '../../assets/Icon';
 import { colors } from '../../assets/style'
@@ -45,12 +45,16 @@ export const Button = styled.button`
 
 export default function AppQuizTitle({ count }) {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const { checkedQuestions } = useSelector(state => state.quiz);
+
     const openAddQuestionModal = () => {
         dispatch(OPEN_QUESTION_MODAL())
     }
 
     const openDeleteModal = () => {
+        if (!checkedQuestions.length) return;
+
         dispatch(OPEN_CONFIRM_MODAL({
             title: 'Are you sure?',
             confirm: () => dispatch(DELETE_QUESTION()),
