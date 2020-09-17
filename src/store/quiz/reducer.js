@@ -7,6 +7,7 @@ const initialState = {
   loading: true,
   activePage: 1,
   error: null,
+  checkedQuestions: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +22,9 @@ const reducer = (state = initialState, action) => {
       return { ...state, activePage: action.data };
     case quizTypes.SET_ERROR:
       return { ...state, error: action.data };
+    case quizTypes.SET_CHECKED_QUESTIONS:
+      console.log('reducer')
+      return { ...state, checkedQuestions: action.data };
     case quizTypes.SET_LOADING:
       return { ...state, loading: action.data };
     default:

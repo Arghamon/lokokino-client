@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { modalNames } from '../../store/modal/actions';
 import AppModalConfirm from './AppModalConfirm';
-import AppQuestionModal from './AppQuestionModal';
+import AppQuestionModal from './AppQuestionModal/AppQuestionModal';
 
 const ModalOverlay = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ const AppModal = ({ name, data, close, closable }) => {
         [modalNames.QUESTION_MODAL]: <AppQuestionModal close={close} data={data} />,
         [modalNames.CONFIRM_MODAL]: <AppModalConfirm close={close} data={data} />,
     };
-    
+
     return (
         <ModalOverlay
             className="app-modal"
