@@ -32,9 +32,10 @@ const Buttons = styled.div`
 
 export default function AppModalQuesitonForm({ form, onChange, questionId, close }) {
 
-    const isEditable = !!questionId;
-    const { error } = useSelector(state => state.quiz);
     const dispatch = useDispatch();
+    const { error } = useSelector(state => state.quiz);
+    
+    const isEditable = !!questionId;
 
 
     const addQuestion = () => {
@@ -49,10 +50,10 @@ export default function AppModalQuesitonForm({ form, onChange, questionId, close
 
     return (
         <Form>
-            <Input correct placeholder="correct answer" defaultValue={form.title} name="title" onChange={onChange} onPaste={onChange} />
-            <Input placeholder="type answer here" defaultValue={form.answer1} name="answer1" onChange={onChange} onPaste={onChange} />
-            <Input placeholder="type answer here" defaultValue={form.answer2} name="answer2" onChange={onChange} onPaste={onChange} />
-            <Input placeholder="type answer here" defaultValue={form.answer3} name="answer3" onChange={onChange} onPaste={onChange} />
+            <Input correct placeholder="correct answer" defaultValue={form.title} name="title" onChange={onChange} />
+            <Input placeholder="type answer here" defaultValue={form.answer1} name="answer1" onChange={onChange} />
+            <Input placeholder="type answer here" defaultValue={form.answer2} name="answer2" onChange={onChange} />
+            <Input placeholder="type answer here" defaultValue={form.answer3} name="answer3" onChange={onChange} />
             <span style={{ color: 'red', fontSize: 12 }}>{error ? 'form is invalid' : ''}</span>
             <Buttons>
                 <span style={{ marginRight: 10, cursor: 'pointer' }} onClick={close}>Cancel</span>

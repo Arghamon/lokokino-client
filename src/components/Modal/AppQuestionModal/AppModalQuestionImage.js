@@ -12,6 +12,7 @@ const Image = styled.img`
     width: 100%;
     height: 300px;
     border-radius: 6px;
+    border: 0.2px solid grey;
     filter: blur(${props => props.loading});
 `
 
@@ -36,7 +37,7 @@ const Checkbox = styled.input`
     left: 5px;
 `
 
-const placeholderImag = "https://placekitten.com/900/500";
+const placeholderImag = "/assets/image-plc.png";
 
 export default function AppModalQuestionImage({ image, setImage, onChange, tags }) {
 

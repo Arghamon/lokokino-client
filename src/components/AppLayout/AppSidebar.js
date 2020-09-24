@@ -24,16 +24,13 @@ export default function AppSidebar() {
     return (
         <aside>
             <Sidebar>
-                <Link to="/">
-                    <Logo>
-                        <img src="/assets/logo.svg" alt="lokokino" />
-                    </Logo>
-                </Link>
+                <Link to="/"><Logo><img src="/assets/logo.svg" alt="lokokino" /></Logo></Link>
                 <Link to="/"><AppSidebarMenuItem name='Questions' icon='question' /></Link>
                 <Link to="/movies"><AppSidebarMenuItem name='Movies' icon='overView' /></Link>
                 <AppSidebarMenuItem name='Collections' icon='collection' />
                 <AppSidebarMenuItem name='User' icon='user' />
-ს            </Sidebar>
+                <a href="play"><AppSidebarMenuItem name='Play' icon='play' /></a>
+            </Sidebar>
         </aside>
     )
 }

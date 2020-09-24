@@ -35,14 +35,15 @@ export default function AppQuestionModal({ data, close }) {
 
     const [form, setForm] = useState({
         title: '',
-        answers: [],
-        tags: [],
+        tags: '',
+        answer1: '',
+        answer2: '',
+        answer3: '',
         image: null,
     });
 
     useEffect(() => {
         if (!data.questionId) return;
-
         const question = questions.find(({ _id }) => data.questionId === _id);
         setForm({
             title: question.title,
@@ -58,7 +59,7 @@ export default function AppQuestionModal({ data, close }) {
         setForm({ ...form, [target.name]: target.value });
         error && dispatch(SET_ERROR(false));
     }
-    
+
     const setImage = (url) => setForm({ ...form, image: url });
 
     return (
