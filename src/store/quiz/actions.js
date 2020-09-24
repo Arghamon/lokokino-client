@@ -67,6 +67,7 @@ export const DELETE_QUESTION = () => async (dispatch, getState) => {
 
     try {
         const { questions } = getState().quiz;
+
         await http.post('delete_quiz', { ids: checkedQuestions });
         const updated = questions.filter(({ _id }) => !checkedQuestions.includes(_id));
 
