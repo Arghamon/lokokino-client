@@ -99,3 +99,17 @@ export const REMOVE_CHECKED_QUESTIONS = (id) => (dispatch, getState) => {
 
     dispatch({ type: quizTypes.SET_CHECKED_QUESTIONS, data })
 }
+
+export const SEARCH_QUIZ = ({ input }) => async (dispatch, getState) => {
+    dispatch({ type: quizTypes.SET_LOADING, data: true });
+
+    const { data } = await http.post('quiz/autocomplete', {
+        title: input
+    });
+
+    dispatch({ type: quizTypes.SET_LOADING, data: false });
+
+    if(!data) return 
+
+    dispatch({ type: quizTypes.SET_QUIZ, data: data.result });
+}

@@ -23,7 +23,6 @@ const reducer = (state = initialState, action) => {
     case quizTypes.SET_ERROR:
       return { ...state, error: action.data };
     case quizTypes.SET_CHECKED_QUESTIONS:
-      console.log('reducer')
       return { ...state, checkedQuestions: action.data };
     case quizTypes.SET_LOADING:
       return { ...state, loading: action.data };

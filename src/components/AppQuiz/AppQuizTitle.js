@@ -5,11 +5,19 @@ import Icon from '../../assets/Icon';
 import { colors } from '../../assets/style'
 import { OPEN_QUESTION_MODAL, OPEN_CONFIRM_MODAL } from '../../store/modal/actions';
 import { DELETE_QUESTION } from '../../store/quiz/actions';
+import AppQuizSearch from './AppQuizSearch';
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
 
 const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 `
 
 const Title = styled.h3`
@@ -62,16 +70,19 @@ export default function AppQuizTitle({ count }) {
     }
 
     return (
-        <Container>
-            <Title>Quiz Questions</Title>
-            <span>{count} Questions</span>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Delete onClick={openDeleteModal}>Delete selected</Delete>
-                <Button onClick={openAddQuestionModal}>
-                    <Icon name="add" />
-                Add question
-            </Button>
-            </div>
-        </Container>
+        <Wrapper>
+            <AppQuizSearch />
+            <Container>
+                <Title>Quiz Questions</Title>
+                <span>{count} Questions</span>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Delete onClick={openDeleteModal}>Delete selected</Delete>
+                    <Button onClick={openAddQuestionModal}>
+                        <Icon name="add" />
+                        Add question
+                    </Button>
+                </div>
+            </Container>
+        </Wrapper>
     )
 }

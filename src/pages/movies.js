@@ -11,10 +11,8 @@ export default function Movies() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (movieList.length) return;
-
         dispatch(FETCH_MOVIES(1));
-    }, [dispatch, movieList]);
+    }, []);
 
     if (loading) return <AppLoader />
 
