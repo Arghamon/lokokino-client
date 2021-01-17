@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Input } from './AppModalQuesitonForm'
 
 export default function AppModalQuestionTags({ onChange, tags }) {

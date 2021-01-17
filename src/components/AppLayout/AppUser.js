@@ -20,14 +20,21 @@ const Name = styled.span`
 const Role = styled.span`
     font-size: 12px;
 `
+const Logout = styled.button`
+    background: #ea5455;
+    color: #fff;
+`
 
-export default function AppUser() {
+export default function AppUser({ onLeave }) {
     return (
         <Container>
             <Image src="/assets/avatar.png" />
             <User>
                 <Name>Davit Bakuradze</Name>
-                <Role>Administrator</Role>
+                <Role>
+                    Administrator
+                    <Logout onClick={onLeave}>Leave</Logout>
+                </Role>
             </User>
         </Container>
     )

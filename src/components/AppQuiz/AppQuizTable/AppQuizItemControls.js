@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Icon from '../../../assets/Icon';
 import styled from 'styled-components';
 import { TitleItem } from './AppQuizHeader';

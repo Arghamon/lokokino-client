@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Item } from './AppQuizItemControls';
 
 export default function AppQuizItemTags({tags}) {

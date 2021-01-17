@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Icon from '../../assets/Icon';
 import { colors } from '../../assets/style';
@@ -19,14 +18,14 @@ const Title = styled.div`
 `;
 
 
-export default function AppHeader() {
+export default function AppHeader({onLeave}) {
     return (
         <Header>
             <Title>
                 <Icon name="question" color={colors.main.green} />
                 <span style={{ marginLeft: 10 }}>Questions</span>
             </Title>
-            <AppUser />
+            <AppUser onLeave={onLeave}/>
         </Header>
     )
 }

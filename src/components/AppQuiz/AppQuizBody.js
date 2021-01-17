@@ -1,4 +1,4 @@
-import React from 'react';
+
 import AppQuizFooter from './AppQuizFooter';
 import AppQuizHeader from './AppQuizTable/AppQuizHeader';
 import AppQuizItem from './AppQuizTable/AppQuizItem';

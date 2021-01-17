@@ -1,5 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { LOGOUT } from '../../store/auth/actions';
 import AppHeader from './AppHeader'
 import AppSidebar from './AppSidebar';
 
@@ -15,11 +16,15 @@ const Content = styled.div`
 
 
 export default function AppLayout({ children }) {
+
+    const dispatch = useDispatch();
+    const leave = () => dispatch(LOGOUT())
+
     return (
         <Conatiner>
             <AppSidebar />
             <Content>
-                <AppHeader />
+                <AppHeader onLeave={leave}/>
                 {children}  
             </Content>
         </Conatiner>

@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import PuffLoader from "react-spinners/PuffLoader";
 import { colors } from '../assets/style';

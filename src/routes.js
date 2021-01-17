@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,6 +11,7 @@ import Home from './pages/home';
 import NotFound from './pages/404';
 import AppLayout from './components/AppLayout/AppLayout';
 import Movies from './pages/movies';
+import Login from './pages/Login';
 
 const PrivateRoute = ({ children, ...rest }) => {
     const isAuthenticated = GetUser();
@@ -54,7 +53,7 @@ const Routes = () => {
             <AppLayout>
                 <Switch>
                     <PublicRoute path="/login">
-                        <div>login</div>
+                        <Login />
                     </PublicRoute>
                     <PrivateRoute path="/" exact>
                         <Home />
