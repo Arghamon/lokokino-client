@@ -3,8 +3,8 @@ import { GetUser, SetUser } from '../utils/Storage';
 
 const instance = axios.create();
 
-// instance.defaults.baseURL = process.env.REACT_APP_BASE_URL;
-instance.defaults.baseURL = 'http://localhost:4000';
+instance.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+// instance.defaults.baseURL = 'http://localhost:4000';
 
 
 instance.interceptors.request.use((request) => {
@@ -40,7 +40,7 @@ instance.interceptors.response.use(
 async function refreshAccessToken() {
   const user = GetUser();
 
-  const { data } = await axios.post(`http://localhost:4000/manage/refresh`, { refreshToken: user?.refreshToken });
+  const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}manage/refresh`, { refreshToken: user?.refreshToken });
   SetUser(data);
   return data?.token;
 }

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -17,7 +19,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     const isAuthenticated = GetUser();
 
     return (
-        <>
+        <AppLayout>
             <Route {...rest}
                 render={({ location }) =>
                     isAuthenticated ? (children) :
@@ -26,7 +28,7 @@ const PrivateRoute = ({ children, ...rest }) => {
                         )
                 }
             />
-        </>
+        </AppLayout>
     );
 }
 
@@ -50,22 +52,20 @@ const Routes = () => {
     return (
         <Router>
             {/* {isAuthenticated && <Navigation />} */}
-            <AppLayout>
-                <Switch>
-                    <PublicRoute path="/login">
-                        <Login />
-                    </PublicRoute>
-                    <PrivateRoute path="/" exact>
-                        <Home />
-                    </PrivateRoute>
-                    <PrivateRoute path="/movies" exact>
-                        <Movies />
-                    </PrivateRoute>
-                    <Route path="*">
-                        <NotFound />
-                    </Route>
-                </Switch>
-            </AppLayout>
+            <Switch>
+                <PublicRoute path="/login">
+                    <Login />
+                </PublicRoute>
+                <PrivateRoute path="/" exact>
+                    <Home />
+                </PrivateRoute>
+                <PrivateRoute path="/movies" exact>
+                    <Movies />
+                </PrivateRoute>
+                <Route path="*">
+                    <NotFound />
+                </Route>
+            </Switch>
         </Router>
     );
 };

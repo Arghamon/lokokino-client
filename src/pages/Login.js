@@ -11,7 +11,7 @@ export default function Login() {
     })
 
     const dispatch = useDispatch();
-    const { loginError, loginSuccess } = useSelector(state => state.auth);
+    const { loginError, loginSuccess, loginPending } = useSelector(state => state.auth);
     const history = useHistory();
 
     const submit = (e) => {
@@ -46,7 +46,7 @@ export default function Login() {
                         {loginError && <p className="danger">password/email incorrect</p>}
                         <input type="text" placeholder="username" name="email" onChange={change} />
                         <input type="password" placeholder="password" name="password" onChange={change} />
-                        <button type="submit">login</button>
+                        <button type="submit" disabled={loginPending}>{loginPending ? 'pending...' : 'Login'}</button>
                     </form>
                 </div>
             </div>
